@@ -1012,6 +1012,9 @@ class ActionsSubtotal
 		    $this->resprints = price($object->lines[$i]->total_ht);
 		}
 		
+		if(is_array($parameters)) $i = & $parameters['i'];
+		else $i = (int)$parameters;
+		
 		if($object->lines[$i]->hideprices) {
 			$this->resprints = ' ';
 			return 1;
