@@ -1011,6 +1011,14 @@ class ActionsSubtotal
 		    else $i = (int)$parameters;
 		    $this->resprints = price($object->lines[$i]->total_ht);
 		}
+		
+		if($object->lines[$i]->hideprices) {
+			$this->resprints = ' ';
+			return 1;
+		} else {
+			return 0;
+		}
+		
 		if (!empty($hideprices)
 		    || (!empty($conf->global->SUBTOTAL_MANAGE_COMPRIS_NONCOMPRIS) && (!empty($object->lines[$i]->array_options['options_subtotal_nc']) || TSubtotal::hasNcTitle($object->lines[$i])) )
 		    )
@@ -1099,6 +1107,13 @@ class ActionsSubtotal
 		}
 		if(is_array($parameters)) $i = & $parameters['i'];
 		else $i = (int)$parameters;
+		
+		if($object->lines[$i]->hideprices) {
+			$this->resprints = ' ';
+			return 1;
+		} else {
+			return 0;
+		}
 		
 		if (!empty($hideprices) 
 				|| (!empty($conf->global->SUBTOTAL_MANAGE_COMPRIS_NONCOMPRIS) && (!empty($object->lines[$i]->array_options['options_subtotal_nc']) || TSubtotal::hasNcTitle($object->lines[$i])) )
@@ -1294,6 +1309,24 @@ class ActionsSubtotal
 		
 		$hideInnerLines = (int)GETPOST('hideInnerLines');
 		$hidedetails = (int)GETPOST('hidedetails');
+		$hideprices = (int)GETPOST('hideprices');
+		
+		if($hideprices) { // Test pour ne cacher les prix que sur les lignes en dessous d'un titre niveau 1
+			$hideonline = false;
+			foreach($object->lines as $k=>&$line) {
+				if(TSubtotal::isTitle($line) || TSubtotal::isSubtotal($line)) {
+					if($line->qty == 1) {
+						$hideonline = true;
+					} else {
+						$hideonline = false;
+					}
+				} else {
+					if($hideonline) $object->lines[$k]->hideprices = true;
+				}
+			}
+		}
+		
+		//echo '<pre>';print_r($object);exit;
 		
 		if ($hideInnerLines) { // si c une ligne de titre
 	    	$fk_parent_line=0;
