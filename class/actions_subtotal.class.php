@@ -1801,7 +1801,7 @@ class ActionsSubtotal
 		/**
 		 * @var $pdf    TCPDF
 		 */
-		global $pdf,$conf;
+		global $pdf,$conf,$outputlangs;
 
 		foreach($parameters as $key=>$value) {
 			${$key} = $value;
@@ -1830,6 +1830,7 @@ class ActionsSubtotal
 				}
 				
 				$label = $line->label;
+				if($label == 'Sous-total') $label = $outputlangs->trans('SubTotal');
 				$description= !empty($line->desc) ? $outputlangs->convToOutputCharset($line->desc) : $outputlangs->convToOutputCharset($line->description);
 				
 				if(empty($label)) {
