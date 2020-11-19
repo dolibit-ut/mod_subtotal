@@ -451,7 +451,7 @@ class TSubtotal {
 	 */
 	public static function isFreeText(&$line)
 	{
-		return $line->special_code == self::$module_number && $line->product_type == 9 && $line->qty == 50;
+		return $line->special_code == self::$module_number && $line->product_type == 9 && $line->qty == 0.000001;
 	}
 
 	/**
