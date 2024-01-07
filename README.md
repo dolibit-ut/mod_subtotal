@@ -1,3 +1,5 @@
 Subtotal
 =======================
-Ce module vous permet de définir facilement des titres et des sous-totaux (sous-titres et sous-sous-totaux via la configuration) dans vos propositions, commandes et factures (y compris avec marges, acompte, ultimate, etc). Vous pouvez ainsi regrouper vos lignes de produits / service simplement en les déplaçant par glisser-deposer en dessous du titre désiré ou au dessus du sous-total désiré... 
+
+This module lets you easily define titles and sub-totals (sub-titles and sub-sub-totals via configuration) in your proposals, orders and invoices (including with margins, down payments, ultimate, etc.). 
+You can group your product/service lines simply by dragging and dropping them below the desired title or above the desired subtotal...
